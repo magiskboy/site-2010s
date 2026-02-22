@@ -1,0 +1,42 @@
+services:
+
+  db:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: uchome
+
+  adminer:
+    image: adminer
+    platform: linux/amd64
+    restart: always
+    ports:
+      - 8081:8080
+
+  uchome:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    platform: linux/amd64
+    depends_on:
+      - db
+    ports:
+      - 80:80
+    expose:
+      - 80
+    volumes:
+      - ./data/uchome.com/admin/UploadFiles/:/var/www/admin/UploadFiles/:rw
+      - ./data/home/config.php:/var/www/home/config.php
+      - ./data/home/attachment:/var/www/home/attachment:rw
+      - ./data/home/data:/var/www/home/data:rw
+      - ./data/home/uc_client/data:/var/www/home/uc_client/data:rw
+      - ./data/home/fish/data:/var/www/home/fish/data:rw
+      - ./data/home/qqfarm/core/data:/var/www/home/qqfarm/core/data:rw
+      - ./data/ucenter/data:/var/www/ucenter/data:rw
+      - ./data/bbs/attachments:/var/www/bbs/attachments:rw
+      - ./data/bbs/forumdata:/var/www/bbs/forumdata:rw
+      - ./data/bbs/uc_client/data:/var/www/bbs/uc_client/data:rw
+    environment:
+      - HTTPS_METHOD=noredirect

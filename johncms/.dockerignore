@@ -1,0 +1,7 @@
+.git
+.idea
+*.md
+.env
+.DS_Store
+BAO_CAO_*.md
+incfiles/db.php

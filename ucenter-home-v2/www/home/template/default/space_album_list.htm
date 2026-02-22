@@ -1,0 +1,205 @@
+<!--{eval $_TPL['titles'] = array('Album');}-->
+<!--{eval $friendsname = array(1 => 'Chỉ bạn bè thấy',2 => 'Bạn có thể thấy',3 => 'Chỉ mình thấy',4 => 'Cần mật khẩu xem');}-->
+
+<!--{template header}-->
+
+<!--{if !empty($_SGLOBAL[inajax])}-->
+	<div id="space_photo">
+		<h3 class="feed_header">
+			<a href="cp.php?ac=upload" class="r_option" target="_blank">Album ảnh</a>
+			(Tổng cộng $count)</h3>
+		<!--{if $count}-->
+		<table cellspacing="4" cellpadding="4" width="100%">
+		<tr>
+			<!--{loop $list $key $value}-->
+			<td width="85" align="center"><a href="space.php?uid=$space[uid]&do=album&id=$value[albumid]" target="_blank"><img src="$value[pic]" alt="$value[albumname]" width="70" /></a></td>
+			<td width="165">
+				<h6><a href="space.php?uid=$space[uid]&do=album&id=$value[albumid]" target="_blank" title="$value[albumname]">$value[albumname]</a></h6>
+				<p class="gray">$value[picnum] hình ảnh</p>
+				<p class="gray">Cập nhật <!--{date('d-m',$value[dateline],1)}--></p>
+			</td>
+			<!--{if $key%2==1}--></tr><tr><!--{/if}-->
+			<!--{/loop}-->
+		</tr>
+		</table>
+		<!--{if $pricount}-->
+		<div class="c_form">Trong này có $pricount album do cài đặt bảo mật của tác giả đã được ẩn đi.</div>
+		<!--{/if}-->
+		<div class="page">$multi</div>
+		<!--{else}-->
+		<div class="c_form">Hiện chưa có album nào.</div>
+		<!--{/if}-->
+	</div><br>
+<!--{else}-->
+
+<!--{if $space[self]}-->
+<div class="searchbar floatright">
+	<form method="get" action="space.php">
+		<input name="searchkey" value="" size="15" class="t_input" type="text">
+		<input name="searchsubmit" value="Tìm kiếm" class="submit" type="submit">
+		<input type="hidden" name="do" value="album" />
+		<input type="hidden" name="view" value="all" />
+		<input type="hidden" name="orderby" value="dateline" />
+	</form>
+</div>
+<h2 class="title"><img src="image/app/album.gif">Album</h2>
+<div class="tabs_header">
+	<ul class="tabs">
+		<!--{if $space[friendnum]}--><li$actives[we]><a href="space.php?uid=$space[uid]&do=$do&view=we"><span>Hình ảnh mới nhất</span></a></li><!--{/if}-->
+		<li$actives[all]><a href="space.php?uid=$space[uid]&do=$do&view=all"><span>Xem tất cả</span></a></li>
+		<li$actives[me]><a href="space.php?uid=$space[uid]&do=$do&view=me"><span>Album của tôi</span></a></li>
+		<li$actives[click]><a href="space.php?uid=$space[uid]&do=$do&view=click"><span>Đã bày tỏ thái độ</span></a></li>
+		<li class="null"><a href="cp.php?ac=upload">Tải hình ảnh mới</a></li>
+	</ul>
+</div>
+<!--{else}-->
+<!--{eval 
+	$_TPL['spacetitle'] = "Album";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=album&view=me\">Tất cả các album</a>";
+}-->
+<!--{template space_menu}-->
+<!--{/if}-->
+
+<!--{if $_GET['view'] == 'me'}-->
+<div>
+<!--{else}-->
+<div id="content" style="width:640px;">
+<!--{/if}-->
+
+
+<!--{if $_GET['orderby'] && $_GET['orderby'] != 'dateline'}-->
+<div class="h_status">
+	Thời gian:
+	<a href="space.php?do=album&view=all&orderby=$_GET[orderby]"{$day_actives[0]}>Tất cả</a><span class="pipe">|</span>
+	<a href="space.php?do=album&view=all&orderby=$_GET[orderby]&day=1"{$day_actives[1]}>1 ngày</a><span class="pipe">|</span>
+	<a href="space.php?do=album&view=all&orderby=$_GET[orderby]&day=2"{$day_actives[2]}>2 ngày</a><span class="pipe">|</span>
+	<a href="space.php?do=album&view=all&orderby=$_GET[orderby]&day=7"{$day_actives[7]}>7 ngày</a><span class="pipe">|</span>
+	<a href="space.php?do=album&view=all&orderby=$_GET[orderby]&day=30"{$day_actives[30]}>30 ngày</a><span class="pipe">|</span>
+	<a href="space.php?do=album&view=all&orderby=$_GET[orderby]&day=90"{$day_actives[90]}>80 ngày</a><span class="pipe">|</span>
+	<a href="space.php?do=album&view=all&orderby=$_GET[orderby]&day=120"{$day_actives[120]}>120 ngày</a>
+</div>
+<!--{/if}-->
+
+<!--{if $space[self] && $_GET['view']=='me'}-->
+<div class="h_status">
+Danh sách album dưới là của riêng bạn.<br>
+Các hình ảnh tải lên sẽ được lưu trữ trong các <a href="space.php?uid=$space[uid]&do=album&id=-1">album mặc định của hệ thống</a>.
+</div>
+<!--{/if}-->
+	
+	
+<!--{if $picmode}-->
+
+	<!--{if $pricount}-->
+	<div class="h_status">Trong này có $pricount hình ảnh do cài đặt bảo mật của tác giả đã được ẩn đi.</div>
+	<!--{/if}-->
+	
+	<!--{if $count}-->
+	<table cellspacing="0" cellpadding="0" width="100%" class="pic_list">
+		<tr>
+		<!--{loop $list $key $value}-->
+		<td align="center">
+			<div class="pic_bg"><a href="space.php?uid=$value[uid]&do=album&picid=$value[picid]"><img src="$value[pic]" alt="" /></a></div>
+			<a href="space.php?uid=$value[uid]&do=$do&id=$value[albumid]">$value[albumname]</a><br>
+			<a href="space.php?uid=$value[uid]">{$_SN[$value[uid]]}</a>
+		</td>
+		<!--{if $key%4==3}--></tr><tr><!--{/if}-->
+		<!--{/loop}-->
+		</tr>
+	</table>
+	<div class="page">$multi</div>
+	<!--{else}-->
+	<div class="c_form">Hiện chưa có album nào.</div>
+	<!--{/if}-->
+	
+<!--{else}-->
+
+	<!--{if $searchkey}-->
+	<div class="h_status">Tìm kiếm album <span style="color:red;font-weight:bold;">$searchkey</span> Kết quả</div>
+	<!--{/if}-->
+	
+	<!--{if $pricount}-->
+	<div class="h_status">Chú ý: Trong này có $pricount hình ảnh do cài đặt bảo mật của tác giả đã được ẩn đi.</div>
+	<!--{/if}-->
+
+	<!--{if $count}-->
+	<table class="album_list" cellspacing="0" cellpadding="0" width="100%">
+	<tr>
+		<!--{loop $list $key $value}-->
+		<td style="padding-bottom: 20px;">
+			<div class="album_bg"><a href="space.php?uid=$value[uid]&do=$do&id=$value[albumid]"><img src="$value[pic]" alt="$value[albumname]" /></a></div>
+			<p><a href="space.php?uid=$value[uid]&do=$do&id=$value[albumid]"><!--{if $value[albumname]}-->$value[albumname]<!--{else}-->Album mặc định<!--{/if}--></a> <!--{if $value[picnum]}--><span class="gray">($value[picnum])</span><!--{/if}--></p>
+			<!--{if $_GET[view]!='me'}--><p><a href="space.php?uid=$value[uid]">{$_SN[$value[uid]]}</a></p><!--{/if}-->
+			<!--{if $value[uid]==$_SGLOBAL[supe_uid]}--><p class="gray"><a href="cp.php?ac=album&op=editpic&albumid=$value[albumid]">Quản lý</a><span class="pipe">|</span><a href="cp.php?ac=upload&albumid=$value[albumid]">Thêm ảnh</a></p><!--{/if}-->
+			<!--{if $_GET[view]!='me'}--><p class="gray">Cập nhật: <!--{date('d-m H:i', $value[updatetime], 1)}--></p><!--{/if}-->
+		</td>
+		<!--{if $key%4==3}--></tr><tr><!--{/if}-->
+		<!--{/loop}-->
+		</tr>
+	</table>
+	<div class="page">$multi</div>
+	<!--{else}-->
+	<div class="c_form">Hiện chưa có album nào</div>
+	<!--{/if}-->
+	
+<!--{/if}-->
+
+</div>
+
+<!--{if $_GET['view'] != 'me'}-->
+<div id="sidebar" style="width:150px;">
+	
+<!--{if $userlist}-->
+	<div class="cat">
+	<h3>Xem bạn bè</h3>
+	<ul class="post_list line_list">
+		<li>
+			Chọn bạn bè:<br>
+			<select name="fuidsel" onchange="fuidgoto(this.value);">
+			<option value="">Tất cả</option>
+			<!--{loop $userlist $value}-->
+			<option value="$value[fuid]"{$fuid_actives[$value[fuid]]}>{$_SN[$value[fuid]]}</option>
+			<!--{/loop}-->
+			</select>
+		</li>
+	</ul>
+	</div>
+<!--{/if}-->
+
+<!--{if $_GET['view'] == 'click'}-->
+	<div class="cat">
+	<h3>Hiển thị các hoạt động</h3>
+	<ul class="post_list line_list">
+		<li$click_actives[all]><a href="space.php?do=album&view=click">Tất cả</a></li>
+		<!--{loop $clicks $value}-->
+		<li{$click_actives[$value[clickid]]}>
+			<a href="space.php?do=album&view=click&clickid=$value[clickid]">$value[name]</a>
+		</li>
+		<!--{/loop}-->
+	</ul>
+	</div>
+<!--{elseif $_GET['view'] == 'all'}-->
+	<div class="cat">
+	<h3>Danh sách</h3>
+	<ul class="post_list line_list">
+		<li$all_actives[all]><a href="space.php?do=album&view=all">Tất cả</a></li>
+		<li$all_actives[dateline]><a href="space.php?do=album&view=all&orderby=dateline">Mới nhất</a></li>
+		<li$all_actives[hot]><a href="space.php?do=album&view=all&orderby=hot&day=$_GET[hotday]">Hôm nay</a></li>
+		<!--{loop $clicks $value}-->
+		<li{$all_actives['click_'.$value[clickid]]}><a href="space.php?do=album&view=all&orderby=click_$value[clickid]&day=$_GET[hotday]">Top {$value[name]}</a></li>
+		<!--{/loop}-->
+	</ul>
+	</div>
+<!--{/if}-->
+
+</div>
+<!--{/if}-->
+
+<script>
+function fuidgoto(fuid) {
+	window.location.href = "space.php?do=album&view=we&fuid="+fuid;
+}
+</script>
+<!--{/if}-->
+
+<!--{template footer}-->

@@ -1,0 +1,4 @@
+<?php
+$cropstype = array (
+);
+?>

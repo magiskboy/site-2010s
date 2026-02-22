@@ -1,0 +1,130 @@
+<!--{eval $_TPL['titles'] = array('Chủ đề nhóm');}-->
+<!--{template header}-->
+
+<!--{if !empty($_SGLOBAL[inajax])}-->
+	<div id="space_photo">
+		<h3 class="feed_header">
+			<a href="cp.php?ac=thread" class="r_option" target="_blank">Tạo bài mới</a>
+			Chủ đề nhóm (tổng $count chủ đề)</h3>
+		<!--{if $list}-->
+		<ul class="line_list">
+		<!--{loop $list $key $value}-->
+			<li><a href="space.php?uid=$value[uid]&do=thread&id=$value[tid]" target="_blank">$value[subject]</a>
+			<span class="gray">&nbsp;<a href="space.php?do=mtag&tagid=$value[tagid]" target="_blank">$value[tagname]</a></span></li>
+		<!--{/loop}-->
+		</ul>
+		<div class="page">$multi</div>
+		<!--{else}-->
+		<div class="c_form">Chưa có chủ đề nào.</div>
+		<!--{/if}-->
+	</div><br>
+<!--{else}-->
+
+<!--{if $space[self]}-->
+<div class="searchbar floatright">
+<form method="get" action="space.php">
+	<input name="searchkey" value="" size="15" class="t_input" type="text">
+	<input name="searchsubmit" value="Tìm chủ đề" class="submit" type="submit">
+	<input type="hidden" name="searchmode" value="1" />
+	<input type="hidden" name="do" value="thread" />
+	<input type="hidden" name="view" value="all" />
+</form>
+</div>
+<h2 class="title"><img src="image/app/mtag.gif">Nhóm - Chủ đề</h2>
+<div class="tabs_header">
+	<ul class="tabs">
+		<li class="active"><a href="space.php?uid=$space[uid]&do=thread"><span>Chủ đề nhóm</span></a></li>
+		<li><a href="space.php?do=mtag&view=me"><span>Nhóm của tôi</span></a></li>
+		<li><a href="space.php?do=mtag&view=manage"><span>Nhóm quản lý</span></a></li>
+		<li><a href="space.php?do=mtag&view=hot"><span>Nhóm Hot</span></a></li>
+		<li><a href="space.php?do=mtag&view=recommend"><span>Nhóm đề cử</span></a></li>
+		<li class="null"><a href="cp.php?ac=thread">Tạo chủ đề mới</a></li>
+		<li class="null"><a href="cp.php?ac=mtag">Tạo nhóm mới</a></li>
+	</ul>
+</div>
+<div class="h_status">
+	<a href="space.php?uid=$space[uid]&do=thread&view=hot"$actives[hot]>Chủ đề Hot</a><span class="pipe">|</span>
+	<a href="space.php?uid=$space[uid]&do=thread&view=new"$actives[new]>Chủ đề mới</a><span class="pipe">|</span>
+	<a href="space.php?uid=$space[uid]&do=thread&view=me"$actives[me]>Chủ đề của tôi</a>
+</div>
+<!--{else}-->
+<!--{eval 
+	$_TPL['spacetitle'] = "Chủ đề";
+	$_TPL['spacemenus'][] = "<a href=\"space.php?uid=$space[uid]&do=thread&view=me\">Tất cả chủ đề của TA</a>";
+}-->
+<!--{template space_menu}-->
+<div class="h_status">Sắp xếp theo thời gian đăng</div>
+<!--{/if}-->
+
+<!--{if $searchkey}-->
+<div class="h_status">Dưới đây là kết quả tìm kiếm cho chủ đề có từ khóa <span style="color:red;font-weight:bold;">$searchkey</span></div>
+<!--{/if}-->
+
+<!--{if $list}-->
+<div class="topic_list">
+	<table cellspacing="0" cellpadding="0">
+		<thead>
+			<tr>
+				<td class="subject">Tiêu đề</td>
+				<td class="mtag">Nhóm</td>
+				<td class="author"><!--{if $_GET[view]!='me'}-->Tác giả <!--{/if}-->(Phản hồi/Xem)</td>
+				<td class="lastpost">Cập nhật cuối</td>
+			</tr>
+		</thead>
+		<tbody>
+		<!--{loop $list $key $value}-->
+			<!--{eval $magicegg = ""}-->							
+			<!--{eval if($value[magicegg]) for($i=0; $i<$value[magicegg]; $i++) $magicegg .= '<img src="image/magic/egg/'.mt_rand(1,6).'.gif" />';}-->
+			<tr<!--{if $key%2==1}--> class="alt"<!--{/if}-->>
+				<td class="subject">
+					$magicegg <a href="space.php?uid=$value[uid]&do=thread&id=$value[tid]" <!--{if $value[magiccolor]}--> class="magiccolor$value[magiccolor]"<!--{/if}-->>$value[subject]</a>
+					<!--{if $value[hot]}-->
+					<br><span class="gray">$value[hot] người đề cử</span>
+					<!--{/if}-->
+				</td>
+				<td><a href="space.php?do=mtag&tagid=$value[tagid]">$value[tagname]</a></td>
+				<td class="author"><a href="space.php?uid=$value[uid]" title="{$_SN[$value[uid]]}">{$_SN[$value[uid]]}</a><br><em>$value[replynum]/$value[viewnum]</em></td>
+				<td class="lastpost"><a href="space.php?uid=$value[lastauthorid]" title="{$_SN[$value[lastauthorid]]}">{$_SN[$value[lastauthorid]]}</a><br><!--{date('m-d H:i',$value[lastpost],1)}--></td>
+			</tr>
+		<!--{/loop}-->
+		</tbody>
+	</table>
+	<div class="page">$multi</div>
+</div>
+<!--{else}-->
+<div class="c_form">Chưa có chủ đề nào.</div>
+<!--{/if}-->
+
+
+<!--{if $rlist}-->
+	<div style="padding-bottom:10px;">
+		<h3 class="l_status">
+			<div class="r_option"><a href="space.php?do=mtag&view=hot">Xem thêm</a></div>
+			Nhóm Hot
+		</h3>
+		<ul class="thread_list">
+		<!--{loop $rlist $value}-->
+			<li>
+			<table width="100%">
+				<tr>
+				<td width="80">
+					<div class="threadimg60"><a href="space.php?do=mtag&tagid=$value[tagid]"><img src="$value[pic]" style="width:60px;"></a></div>
+				</td>
+				<td>
+					<a href="space.php?do=mtag&tagid=$value[tagid]" style="font-weight:bold;">$value[tagname]</a>
+					<div class="gray">$value[title]</div>
+					Có <span class="num">$value[membernum]</span> người tham gia
+					<div class="gray">
+						Chủ đề: $value[threadnum], Phản hồi: $value[postnum]
+					</div>
+				</td>
+				</tr></table>
+			</li>
+		<!--{/loop}-->
+		</ul>
+	</div>
+<!--{/if}-->
+
+<!--{/if}-->
+
+<!--{template footer}-->

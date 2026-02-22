@@ -1,0 +1,417 @@
+<!--{template header}-->
+<!--{template cp_header}-->
+
+<div class="l_status c_form">
+	<a href="cp.php?ac=privacy"$cat_actives[base]>Cài đặt riêng tư</a><span class="pipe">|</span>
+	<a href="cp.php?ac=privacy&op=view"$cat_actives[view]>Bộ lọc tin</a>
+</div>
+
+
+<form method="post" action="cp.php?ac=privacy" class="c_form">
+
+<!--{if empty($_GET['op'])}-->
+	<table cellspacing="0" cellpadding="0" class="formtable">
+		<caption>
+			<h2>Cài đặt riêng tư</h2>
+			<p>Bạn có thể kiểm soát hoàn toàn ai có thể xem nội dung gì! Ví dụ: hồ sơ, thông tin cá nhân, blog, hình ảnh, nhóm của bạn, bạn có thể thiết lập cái gì là Công khai và cái gì không</p>
+		</caption>
+		<tr>
+			<th width="150">Trang chủ</th>
+			<td><select name="privacy[view][index]">
+				<option value="0"$sels[view][index][0]>Công khai - Tất cả mọi người</option>
+				<option value="1"$sels[view][index][1]>Chỉ bạn bè</option>
+				<option value="2"$sels[view][index][2]>Riêng tư</option>
+				</select></td>
+		</tr>
+		<tr>
+			<th>Danh sách bạn bè</th>
+			<td><select name="privacy[view][friend]">
+				<option value="0"$sels[view][friend][0]>Công khai - Tất cả mọi người</option>
+				<option value="1"$sels[view][friend][1]>Chỉ bạn bè</option>
+				<option value="2"$sels[view][friend][2]>Riêng tư</option>
+				</select></td>
+		</tr>
+		<tr>
+			<th>Tường nhà</th>
+			<td><select name="privacy[view][wall]">
+				<option value="0"$sels[view][wall][0]>Công khai - Tất cả mọi người</option>
+				<option value="1"$sels[view][wall][1]>Chỉ bạn bè</option>
+				<option value="2"$sels[view][wall][2]>Riêng tư</option>
+				</select></td>
+		</tr>
+		<tr>
+			<th>Tin của tôi</th>
+			<td><select name="privacy[view][feed]">
+				<option value="0"$sels[view][feed][0]>Công khai - Tất cả mọi người</option>
+				<option value="1"$sels[view][feed][1]>Chỉ bạn bè</option>
+				</select></td>
+		</tr>
+		<tr>
+			<th>Trạng thái</th>
+			<td><select name="privacy[view][doing]">
+				<option value="0"$sels[view][doing][0]>Công khai - Tất cả mọi người</option>
+				<option value="1"$sels[view][doing][1]>Chỉ bạn bè</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td class="gray">
+				Cài đặt quyền riêng tư này chỉ có hiệu lực khi người khác truy cập trang của bạn<br>Trạng thái của bạn sẽ hiển thị trong danh sách trạng thái của website!</td>
+			</td>
+		</tr>
+		<tr>
+			<th>Blog</th>
+			<td><select name="privacy[view][blog]">
+				<option value="0"$sels[view][blog][0]>Công khai - Tất cả mọi người</option>
+				<option value="1"$sels[view][blog][1]>Chỉ bạn bè</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td class="gray">Cài đặt quyền riêng tư này chỉ có hiệu lực khi người khác truy cập trang của bạn
+				<br>Bạn phải thiết lập quyền riêng tư độc lập cho mỗi blog khi bạn đăng blog mới.
+				</td>
+		</tr>
+		<tr>
+			<th>Album</th>
+			<td><select name="privacy[view][album]">
+				<option value="0"$sels[view][album][0]>Công khai - Tất cả mọi người</option>
+				<option value="1"$sels[view][album][1]>Chỉ bạn bè</option>
+				</select>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td class="gray">Cài đặt quyền riêng tư này chỉ có hiệu lực khi người khác truy cập trang của bạn
+				<br>Bạn phải thiết lập quyền riêng tư độc lập cho từng album.</td>
+		</tr>
+		<tr>
+			<th>Chia sẻ</th>
+			<td><select name="privacy[view][share]">
+				<option value="0"$sels[view][share][0]>Công khai - Tất cả mọi người</option>
+				<option value="1"$sels[view][share][1]>Chỉ bạn bè</option>
+				</select></td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td class="gray">
+				Cài đặt quyền riêng tư này chỉ có hiệu lực khi người khác truy cập trang của bạn
+				<br>Chia sẻ của bạn sẽ hiển thị trong danh sách chia sẻ của website!
+			</td>
+		</tr>
+		<tr>
+			<th>Sự kiện</th>
+			<td><select name="privacy[view][event]">
+				<option value="0"$sels[view][event][0]>Công khai - Tất cả mọi người</option>
+				<option value="1"$sels[view][event][1]>Chỉ bạn bè</option>
+				</select></td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td class="gray">
+				this privacy setting just effective when others visit your page£»
+			</td>
+		</tr>
+		<tr>
+			<th>Thăm dò</th>
+			<td><select name="privacy[view][poll]">
+				<option value="0"$sels[view][poll][0]>Công khai - Tất cả mọi người</option>
+				<option value="1"$sels[view][poll][1]>Chỉ bạn bè</option>
+				</select></td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td class="gray">
+				this privacy setting just effective when others visit your page£»
+			</td>
+		</tr>
+		<tr>
+			<th>Èº×é</th>
+			<td><select name="privacy[view][mtag]">
+				<option value="0"$sels[view][mtag][0]>Public- All Users</option>
+				<option value="1"$sels[view][mtag][1]>Only Friends</option>
+				<option value="2"$sels[view][mtag][2]>Just Me</option>
+				</select></td>
+		</tr>
+		<!--{if $_SCONFIG[videophoto] && $space[videostatus]}-->
+		<tr>
+			<th></th>
+			<td><img src="image/videophoto.gif" align="absmiddle"> Nếu bạn đã xác thực qua WebCam, bạn có thể thiết lập các quyền sau cho những người dùng chưa xác thực:</td>
+		</tr>
+		<tr>
+			<th>Xem ảnh xác thực của tôi</th>
+			<td><select name="privacy[view][videoviewphoto]">
+				<option value="0"$sels[view][videoviewphoto][0]>Cài đặt mặc định của trang</option>
+				<option value="1"$sels[view][videoviewphoto][1]>Cho phép</option>
+				<option value="2"$sels[view][videoviewphoto][2]>Cấm</option>
+				</select></td>
+		</tr>
+		<tr>
+			<th>Bạn bè từ Game/Ứng dụng</th>
+			<td><select name="privacy[view][videofriend]">
+				<option value="0"$sels[view][videofriend][0]>Cài đặt mặc định của trang</option>
+				<option value="1"$sels[view][videofriend][1]>Cho phép</option>
+				<option value="2"$sels[view][videofriend][2]>Cấm</option>
+				</select></td>
+		</tr>
+		<tr>
+			<th>Trêu chọc tôi</th>
+			<td><select name="privacy[view][videopoke]">
+				<option value="0"$sels[view][videopoke][0]>Cài đặt mặc định của trang</option>
+				<option value="1"$sels[view][videopoke][1]>Cho phép</option>
+				<option value="2"$sels[view][videopoke][2]>Cấm</option>
+				</select></td>
+		</tr>
+		<tr>
+			<th>Tường nhà</th>
+			<td><select name="privacy[view][videowall]">
+				<option value="0"$sels[view][videowall][0]>Cài đặt mặc định của trang</option>
+				<option value="1"$sels[view][videowall][1]>Cho phép</option>
+				<option value="2"$sels[view][videowall][2]>Cấm</option>
+				</select></td>
+		</tr>
+		<tr>
+			<th>Bình luận về thông tin của tôi</th>
+			<td><select name="privacy[view][videocomment]">
+				<option value="0"$sels[view][videocomment][0]>Cài đặt mặc định của trang</option>
+				<option value="1"$sels[view][videocomment][1]>Cho phép</option>
+				<option value="2"$sels[view][videocomment][2]>Cấm</option>
+				</select></td>
+		</tr>
+		<!--{/if}-->
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="submit" name="privacysubmit" value="Lưu cài đặt" class="submit"></td>
+		</tr>
+	</table>
+	
+	<table cellspacing="0" cellpadding="0" class="formtable" id="feed">
+		<caption>
+			<h2>Cài đặt tin tức cá nhân</h2>
+			<p>Hệ thống sẽ hiển thị các hành động của bạn trong tin tức cá nhân, bạn bè có thể dễ dàng xem tin của bạn.<br>Khi các hành động sau xảy ra, bạn có thể kiểm soát nội dung nào sẽ đăng lên bản tin hoặc ai có thể xem bản tin của bạn</p>
+		</caption>
+		<tr>
+			<th width="150">&nbsp;</th>
+			<td><input type="checkbox" name="privacy[feed][doing]" value="1"$sels[feed][doing]>Trạng thái</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="checkbox" name="privacy[feed][blog]" value="1"$sels[feed][blog]>Blog mới</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="checkbox" name="privacy[feed][upload]" value="1"$sels[feed][upload]>Tải ảnh lên</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="checkbox" name="privacy[feed][share]" value="1"$sels[feed][share]>Thêm chia sẻ</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="checkbox" name="privacy[feed][poll]" value="1"$sels[feed][poll]>Tạo thăm dò</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="checkbox" name="privacy[feed][joinpoll]" value="1"$sels[feed][joinpoll]>Bình chọn của tôi</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="checkbox" name="privacy[feed][thread]" value="1"$sels[feed][thread]>Tạo thảo luận</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="checkbox" name="privacy[feed][post]" value="1"$sels[feed][post]>Trả lời chủ đề</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="checkbox" name="privacy[feed][mtag]" value="1"$sels[feed][mtag]>Tham gia nhóm</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="checkbox" name="privacy[feed][event]" value="1"$sels[feed][event]>Hoạt động sự kiện mới</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="checkbox" name="privacy[feed][join]" value="1"$sels[feed][join]>Sự kiện của tôi</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="checkbox" name="privacy[feed][friend]" value="1"$sels[feed][friend]>Kết bạn</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="checkbox" name="privacy[feed][comment]" value="1"$sels[feed][comment]>Bình luận</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="checkbox" name="privacy[feed][show]" value="1"$sels[feed][show]>Xếp hạng đấu giá</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="checkbox" name="privacy[feed][credit]" value="1"$sels[feed][credit]>Tiêu tốn điểm thưởng</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="checkbox" name="privacy[feed][invite]" value="1"$sels[feed][invite]>Mời bạn bè</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="checkbox" name="privacy[feed][task]" value="1"$sels[feed][task]>Hoàn thành nhiệm vụ</td>
+		</tr>				
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="checkbox" name="privacy[feed][profile]" value="1"$sels[feed][profile]>Cập nhật hồ sơ</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="checkbox" name="privacy[feed][click]" value="1"$sels[feed][click]>Bày tỏ thái độ với blog/ảnh/chủ đề</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="submit" name="privacysubmit" value="Lưu cài đặt" class="submit"></td>
+		</tr>
+	</table>
+	
+<!--{else}-->
+	<!--{eval
+			$iconnames['activity'] = 'Blog';
+			$iconnames['album'] = 'Album';
+			$iconnames['blog'] = 'Blog';
+			$iconnames['comment'] = 'Bình luận';
+			$iconnames['blogcomment'] = 'Bình luận Blog';
+			$iconnames['clickblog'] = 'Bày tỏ thái độ với Blog';
+			$iconnames['clickpic'] = 'Bày tỏ thái độ với ảnh';
+			$iconnames['clickthread'] = 'Bày tỏ thái độ với chủ đề';
+			$iconnames['piccomment'] = 'Bình luận ảnh';
+			$iconnames['sharecomment'] = 'Bình luận Chia sẻ';
+			$iconnames['debate'] = 'Tranh luận diễn đàn';
+			$iconnames['discuz'] = 'Diễn đàn';
+			$iconnames['doing'] = 'Trạng thái';
+			$iconnames['friend'] = 'Bạn bè';
+			$iconnames['goods'] = 'Hàng hóa';
+			$iconnames['mood'] = 'Cảm xúc';
+			$iconnames['mtag'] = 'Nhóm';
+			$iconnames['event'] = 'Sự kiện';
+			$iconnames['eventcomment'] = 'Bình luận sự kiện';
+			$iconnames['eventmember'] = 'Tham gia sự kiện';
+			$iconnames['eventmemberstatus'] = 'Trạng thái sự kiện';
+			$iconnames['network'] = 'Duyệt';
+			$iconnames['poll'] = 'Bình chọn diễn đàn';
+			$iconnames['post'] = 'Đăng bài diễn đàn';
+			$iconnames['profile'] = 'Cập nhật hồ sơ';
+			$iconnames['reward'] = 'Thưởng diễn đàn';
+			$iconnames['share'] = 'Chia sẻ';
+			$iconnames['sharenotice'] = 'Thông báo chia sẻ';
+			$iconnames['show'] = 'Xếp hạng';
+			$iconnames['task'] = 'Nhiệm vụ';
+			$iconnames['thread'] = 'Chủ đề';
+			$iconnames['post'] = 'Trả lời chủ đề';
+			$iconnames['video'] = 'Video/WebCam';
+			$iconnames['wall'] = 'Để lại bình luận';
+			$iconnames['credit'] = 'Đấu giá hiện tại';
+			$iconnames['poll'] = 'Thăm dò';
+			$iconnames['pollcomment'] = 'Bình luận thăm dò';
+			$iconnames['pollinvite'] = 'Mời thăm dò';
+		}-->
+
+	<table cellspacing="0" cellpadding="0" class="formtable">
+		<caption>
+			<h2>Quy tắc lọc 1: Bạn có thể bỏ qua toàn bộ tin từ một nhóm người dùng</h2>
+			<p>Bạn có thể quyết định bỏ qua tin từ nhóm nào, tất cả tin từ các thành viên trong nhóm đó sẽ bị bỏ qua.</p>
+		</caption>
+		<!--{loop $groups $key $value}-->
+		<tr>
+			<th width="150">&nbsp;</th>
+			<td><input type="checkbox" name="privacy[filter_gid][$key]" value="$key"<!--{if isset($space['privacy']['filter_gid'][$key])}--> checked<!--{/if}-->>
+				$value</td>
+		</tr>
+		<!--{/loop}-->
+		<tr>
+			<th>&nbsp;</th>
+			<td>
+			<input type="submit" name="privacy2submit" value="Lưu cài đặt" class="submit">
+			<br>Bạn có thể sắp xếp bạn bè vào các nhóm khác nhau, sau đó bạn có thể quyết định nhóm nào bạn không muốn nhận tin hoặc chia sẻ tin cá nhân của mình, <a href="space.php?do=friend">Mở danh sách bạn bè</a> để phân loại.
+			</td>
+		</tr>
+	</table>
+	<br>
+	<table cellspacing="0" cellpadding="0" class="formtable">
+		<caption>
+			<h2>Quy tắc lọc 2: Chỉ định tiêu chí để bỏ qua một người bạn cụ thể</h2>
+			<p>Nhấp vào biểu tượng tin dưới danh sách tin của bạn bè trên trang chủ, sau đó bạn có thể thiết lập tin nào nên hiển thị hoặc ẩn đi.<br>Sau đây là danh sách các loại tin RSS mà bạn đã thực hiện từ trang chủ của mình.</p>
+		</caption>
+		<!--{if $icons}-->
+		
+		<tr>
+			<th width="150">&nbsp;</th>
+			<td>
+			<ul>
+			<!--{loop $icons $key $icon}-->
+			<!--{eval $uid = $uids[$key];$icon_uid="$icon|$uid";}-->
+			<li>
+			<!--{if is_numeric($icon)}-->
+				<img src="http://appicon.manyou.com/icons/{$icon}" align="absmiddle">
+			<!--{else}-->
+				<img src="image/icon/{$icon}.gif" align="absmiddle">
+			<!--{/if}-->
+				<input type="checkbox" name="privacy[filter_icon][$icon_uid]" value="1" checked> 
+				<span class="type_$icon"> <!--{if isset($iconnames[$icon])}-->$iconnames[$icon]<!--{else}-->$icon<!--{/if}--> (<!--{if $users[$uid]}--><a href="space.php?uid=$uid" target="_blank">$users[$uid]</a><!--{else}-->Tất cả bạn bè<!--{/if}-->)</span>
+			</li>
+			<!--{/loop}-->
+			</ul>
+			</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td>
+			<input type="submit" name="privacy2submit" value="Save settings" class="submit">
+			</td>
+		</tr>
+		<!--{else}-->
+		<tr>
+			<th width="150">&nbsp;</th>
+			<td>Chưa có tin RSS nào bị bỏ qua</td>
+		</tr>
+		<!--{/if}-->
+	</table>
+	<br>
+	<table cellspacing="0" cellpadding="0" class="formtable">
+		<caption>
+			<h2>Quy tắc chọn 3: Bỏ qua Thông báo đặc biệt từ một số người bạn cụ thể</h2>
+			<p>Nhấp vào biểu tượng bỏ qua đằng sau danh sách thông báo, sau đó bạn có thể từ chối một số loại thông báo từ một người bạn cụ thể.<br>Sau đây là danh sách loại thông báo và tên bạn bè đã bị bỏ qua, bạn có thể xóa chúng khỏi danh sách bỏ qua.</p>
+		</caption>
+		<!--{if $types}-->
+		
+		<tr>
+			<th width="150">&nbsp;</th>
+			<td>
+				<ul>
+				<!--{loop $types $key $type}-->
+				<!--{eval $uid = $uids[$key];$type_uid="$type|$uid";}-->
+					<li>
+						<input type="checkbox" name="privacy[filter_note][$type_uid]" value="1" checked>
+						<span class="type_$type"> <!--{if isset($iconnames[$type])}-->$iconnames[$type]<!--{else}-->$type<!--{/if}--> (<!--{if $users[$uid]}--><a href="space.php?uid=$uid" target="_blank">$users[$uid]</a><!--{else}-->All friends<!--{/if}-->)</span>
+					</li>
+				<!--{/loop}-->
+				</ul>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td>
+			<input type="submit" name="privacy2submit" value="Save settings" class="submit">
+			</td>
+		</tr>
+		<!--{else}-->
+		<tr>
+			<th width="150">&nbsp;</th>
+			<td>Không có loại tin động nào bị chặn.</td>
+		</tr>
+		<!--{/if}-->
+	</table>
+<!--{/if}-->
+<input type="hidden" name="formhash" value="<!--{eval echo formhash();}-->" />
+</form>
+
+
+<!--{template footer}-->

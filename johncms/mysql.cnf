@@ -1,0 +1,4 @@
+# Tương thích JohnCMS 4.x: tắt strict mode để INSERT admin không lỗi
+# (bảng users có cột NOT NULL không DEFAULT; MySQL 5.7 strict sẽ từ chối)
+[mysqld]
+sql_mode=NO_ENGINE_SUBSTITUTION
