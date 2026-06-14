@@ -104,4 +104,6 @@ dist
 .tern-port
 
 # Docker persistent data (mount points, xem PERSISTENT_DATA.md)
-/data/
+data
+!data/home/data/config.php
+!/data/home/data/tpl_cache

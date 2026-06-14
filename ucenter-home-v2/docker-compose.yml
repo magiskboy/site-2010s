@@ -6,7 +6,10 @@ services:
     restart: always
     platform: linux/amd64
     environment:
-      MYSQL_ROOT_PASSWORD: uchome
+      MYSQL_ROOT_PASSWORD: ucenter
+      MYSQL_DATABASE: ucenter
+    volumes:
+      - ./data/mysql:/var/lib/mysql
 
   adminer:
     image: adminer
@@ -28,7 +31,6 @@ services:
       - 80
     volumes:
       - ./data/uchome.com/admin/UploadFiles/:/var/www/admin/UploadFiles/:rw
-      - ./data/home/config.php:/var/www/home/config.php
       - ./data/home/attachment:/var/www/home/attachment:rw
       - ./data/home/data:/var/www/home/data:rw
       - ./data/home/uc_client/data:/var/www/home/uc_client/data:rw
